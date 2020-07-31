@@ -1,0 +1,15 @@
+<%- include('partials/header') %>
+<form action="/search" method="post">
+<input type="text" name="search" placeholder="interest">
+<select name="filter">
+  <option value="popularity">popularity</option>
+  <option value="relevancy">relevancy</option>
+  <option value="publishedAt">latest</option>
+</select>
+<button type="submit">search</button>
+</form>
+
+<%- include('common')%>
+
+
+<%-include('partials/footer')%>

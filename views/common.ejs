@@ -1,0 +1,28 @@
+
+<h1>TOP HEADLINES</h1>
+<div class="container-fluid">
+<%for(var i=0;i< news.length ;i+=4){ %>
+<div class="row">
+
+
+  <% for(var j=i;j<(i+4);j++){ %>
+  <%var single_news=news[j];%>
+  <div class="col-lg-3">
+
+  <div class="card">
+    <img class="card-img-top" src="<%=single_news.urlToImage%>" alt="Card image cap">
+    <div class="card-body">
+      <p class="card-text"><%=single_news.title%></p>
+      <a href="<%single_news.url%>" > READ MORE</a>
+     </div>
+
+  
+</div>
+</div>
+   
+<%}%>	
+</div>
+</div>
+
+<%}%>
+</div>
