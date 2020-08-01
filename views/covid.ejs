@@ -1,0 +1,26 @@
+<%- include('partials/header') %>
+
+
+<div class="contain">
+<div class="grid">
+<%data.forEach(function(single_state){%>
+<div class="item">
+    <div class="card bg-dark text-white" style="width:10rem;height:12rem;word-wrap: break-word;">
+   <p class="state"><%=single_state.state%></p>
+	<p>Active:<%=single_state.active%></p>
+	<p>Confirmed:<%=single_state.confirmed%></p>
+	<p>Recovered:<%=single_state.recovered%></p>
+
+   
+    
+  </div>
+</div>
+	
+<%})%>
+</div>
+</div>
+
+
+<%-include('partials/footer')%>
+
+

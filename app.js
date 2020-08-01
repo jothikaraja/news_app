@@ -37,7 +37,23 @@ app.get("/",function(req,res){
 app.get("/search",function(req,res){
 	res.render("search",{news:json.articles});
 })
-
+app.get("/covid",function(req,res){
+	const url="https://api.covidindiatracker.com/state_data.json";
+	https.get(url,function(resp){
+		let body="";
+		resp.on("data",function(chunk){
+			body+=chunk;
+		})
+		resp.on("end",function(){
+			try{
+				var next_json=JSON.parse(body);
+				res.render("covid",{data:next_json});
+			}catch(error){
+				console.log(error.message);
+			}
+		})
+	})
+})
 
 app.post("/search",function(req,res){
 	console.log("hi");
