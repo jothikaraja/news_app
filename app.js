@@ -23,7 +23,7 @@ app.get("/",function(req,res){
     	try{
 
     		    json=JSON.parse(body);
-    		    res.render("news",{news:json.articles})
+    		    res.render("search",{news:json.articles,heading:"TOP HEADLINES"})
     	}catch(error){
     		console.log(error.message);
     	}
@@ -34,8 +34,38 @@ app.get("/",function(req,res){
 	 
 
 })
+function isEmpty(obj) {
+    for(var key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+}
 app.get("/search",function(req,res){
-	res.render("search",{news:json.articles});
+	if(isEmpty(json)){
+      
+      const url="https://newsapi.org/v2/top-headlines?country=in&apiKey="+process.env.API_KEY;
+	 https.get(url,function(resp){
+      let body="";
+      resp.on("data",function(chunk){
+          body+=chunk;
+      })
+    resp.on("end",function(){
+
+    	try{
+
+    		    json=JSON.parse(body);
+    		    res.render("news",{news:json.articles,heading:"TOP HEADLINES"})
+    	}catch(error){
+    		console.log(error.message);
+    	}
+
+
+    })
+})
+	}else{
+	res.render("search",{news:json.articles,heading:"TOP HEADLINES"});
+}
 })
 app.get("/covid",function(req,res){
 	const url="https://api.covidindiatracker.com/state_data.json";
@@ -57,7 +87,7 @@ app.get("/covid",function(req,res){
 
 app.post("/search",function(req,res){
 	console.log("hi");
-	const search=req.body.search;
+	const search=String(req.body.search);
 	if(!search){
 		res.redirect("/");
 	}
@@ -72,7 +102,7 @@ app.post("/search",function(req,res){
 		resp.on("end",function(){
 			try{
 				var next_json=JSON.parse(body);
-				res.render("search",{news:next_json.articles});
+				res.render("search",{news:next_json.articles,heading:search.toUpperCase()});
 			}catch(error){
 				console.log(error.message);
 			}

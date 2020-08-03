@@ -1,12 +1,12 @@
 <%- include('partials/header') %>
 <form action="/search" method="post">
-<input type="text" name="search" placeholder="interest">
-<select name="filter">
+<input type="text" name="search" placeholder="interest" style="margin:1rem;height:2rem;">
+<select name="filter" style="margin:1rem;margin-right:0;height:2rem;">
   <option value="popularity">popularity</option>
   <option value="relevancy">relevancy</option>
   <option value="publishedAt">latest</option>
 </select>
-<button type="submit">search</button>
+<button type="submit" class="btn btn-dark" style="height:2rem;"><i class="fa fa-search" aria-hidden="true"></i></button>
 </form>
 
 <%- include('common')%>
